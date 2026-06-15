@@ -23,9 +23,6 @@ class WPController extends Controller
                 'query' => $query,
             ]);
 
-//            $a = $response->json();
-//            dd($a['errors']);
-
             $root_query = 'posts';
 
             $result = GraphqlHelper::checkResponseIsSuccess($response, $root_query);
@@ -40,11 +37,15 @@ class WPController extends Controller
             $raw_content = $response->json();
 
             foreach ($raw_content['data'][$root_query]['edges'] as $post) {
-                Property::create([
-                    'wp_post_id' => $post['node']['databaseId'],
-                    'title' => $post['node']['title'],
-                    'content' => $post['node']['content'],
-                ]);
+                Property::updateOrCreate(
+                    [
+                        'wp_post_id' => $post['node']['databaseId'],
+                    ],
+                    [
+                        'title'   => $post['node']['title'],
+                        'content' => $post['node']['content'],
+                    ]
+                );
             }
 
             return response()->json([
