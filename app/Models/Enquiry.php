@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-#[Fillable(['name', 'email', 'phone', 'message', 'wp_post_id'])]
+#[Fillable(['name', 'email', 'phone', 'message', 'wp_post_id', 'status'])]
 
 
 class Enquiry extends Model
