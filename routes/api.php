@@ -23,3 +23,7 @@ Route::get('/enquiries', 'App\Http\Controllers\EnquiryController@getEnquiries');
 Route::post('/webhook/crm', 'App\Http\Controllers\WebhookController@updateStatus');
 
 Route::get('sync-wp', 'App\Http\Controllers\WPController@syncWPContent');
+
+Route::prefix('properties')->group(function () {
+    Route::get('/', 'App\Http\Controllers\PropertyController@getProperties');
+});
